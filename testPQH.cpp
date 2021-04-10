@@ -68,7 +68,7 @@ void intPQ(){
                 }
                 break;
             case 5:
-               cout<<intPQHeap.size()<<endl; 
+               cout<<"Heap size: "<<intPQHeap.size()<<endl; 
                 //Print size (Working)
                 break;
             case 6:
@@ -140,7 +140,7 @@ void stringPQ(){
                 break;
             case 5:
                 //Print size
-                cout<<stringPQ.size()<<endl;
+                cout<<"Heap size: "<<stringPQ.size()<<endl;
                 break;
             case 6:
                 //Display front element
