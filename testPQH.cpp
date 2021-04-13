@@ -15,6 +15,8 @@ using namespace std;
 
 void printMenu();
 
+void printMenuWOop0();
+
 void convert(string& s){
     for(int i = 0; i < s.length(); i++){
         s[i] = tolower(s[i]);
@@ -23,12 +25,12 @@ void convert(string& s){
 
 void intPQ(){
     
-    priority_queue_heap<int> intPQHeap; //Are we supposed to be making Heap objects in this program instead? Needed for case 7..
+    priority_queue_heap<int> intPQHeap; 
     
     int choice;
     do{
         cout<<endl;
-        printMenu();
+        printMenuWOop0();
         cin >> choice;
         switch(choice){
             case 1:
@@ -80,9 +82,13 @@ void intPQ(){
                 }
                 break;
             case 7:
-                cout<<endl;    // (Working)
-                intPQHeap.check_PQ_heap();
-                cout<<endl;
+                if(intPQHeap.is_empty()){
+                    cout<<"Heap is empty."<<endl;
+                }else{
+                    cout<<endl;    
+                    intPQHeap.check_PQ_heap();
+                    cout<<endl;
+                }
                 break;
             case 8:
                 cout<<"Program ended."<<endl;
@@ -101,7 +107,7 @@ void stringPQ(){
     string enQString;
     do{
         cout<<endl;
-        printMenu();
+        printMenuWOop0();
         cin >> choice;
         switch(choice){
             case 1:                                                 //Enqueue element
@@ -153,9 +159,13 @@ void stringPQ(){
                 break;
             case 7:
                 //Print queue elements
-                cout<<endl;
-                stringPQ.check_PQ_heap();
-                cout<<endl;
+                if(stringPQ.is_empty()){
+                    cout<<"Heap is empty."<<endl;
+                }else{
+                    cout<<endl;
+                    stringPQ.check_PQ_heap();
+                    cout<<endl;
+                }
                 break;
             case 8:
                 cout<<"Program ended."<<endl;
@@ -171,16 +181,32 @@ int main(){
     
     string queueType;
     bool qEntered = false; 
-    priority_queue_heap<int> we; 
+    bool case0selected = false;
+    string case0;
+    while(case0selected == false){
+        printMenu();
+        getline(cin, case0);
+        if(case0 == "0"){
+            case0selected = true;
+            //Print the menu & make sure a queue type is entered (The whole while statement below)
+        }else{
+            //Print "Must select queue type before continuing (option 0)."
+            cout<<"\nMust select queue type before continuing (Select option 0).\n"<<endl;
+            case0selected = false;
+        }
+    }
+    if(case0selected == true){
     while(qEntered == false){   //Queue Type Selection
-        cout<<"0.Enter a Queue Type (int or string)"<<endl;
+        cout<<"0. Enter a Queue Type (int or string)"<<endl;
         cin >> queueType;
         convert(queueType);
         if(queueType == "string" || queueType == "int"){
             qEntered = true;
         }else{
+            cout<<"Please enter a queue type (int or string).\n"<<endl;
             qEntered = false;
         }
+    }
     }
     if(queueType == "string"){
         stringPQ();
@@ -191,6 +217,7 @@ int main(){
 
 
 void printMenu(){
+    cout<<"0. Enter a Queue Type (int or string)"<<endl;
     cout<<"1. Enqueue Element"<<endl;
     cout<<"2. Dequeue Element"<<endl;
     cout<<"3. Check is_full"<<endl;
@@ -198,5 +225,16 @@ void printMenu(){
     cout<<"5. Print size"<<endl;
     cout<<"6. Display front element"<<endl;
     cout<<"7. Print queue elements"<<endl;
-    cout<<"8. Quit program"<<endl;
+    cout<<"8. Quit program\n"<<endl;
+}
+
+void printMenuWOop0(){
+    cout<<"1. Enqueue Element"<<endl;
+    cout<<"2. Dequeue Element"<<endl;
+    cout<<"3. Check is_full"<<endl;
+    cout<<"4. Check is_empty"<<endl;
+    cout<<"5. Print size"<<endl;
+    cout<<"6. Display front element"<<endl;
+    cout<<"7. Print queue elements"<<endl;
+    cout<<"8. Quit program\n"<<endl;
 }
